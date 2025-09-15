@@ -143,6 +143,15 @@ with open(output_file_name, mode='w', newline='') as file:
     writer.writerow(['Index', 'Arrival Time', 'Job Size', 'End Time', 'Start Job', 'Response Time', 'Turnaround Time', 'Job State', 'Context Switches'])
     for i in range(numJobs):
         writer.writerow([i, arrivalTime[i], jobSize[i], endTime[i], startJob[i], responseTime[i], turnAroundTime[i], jobState[i], contextSwitch[i]])
+# calculate averages
+avg_response_time = sum(responseTime) / numJobs
+avg_turnaround_time = sum(turnAroundTime) / numJobs
+
+# append averages to CSV
+with open(output_file_name, mode='a', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(['Average Response Time', round(avg_response_time, 2)])
+    writer.writerow(['Average Turnaround Time', round(avg_turnaround_time, 2)])
 
 print(f"CSV file processed successfully. Output saved to {output_file_name}")
                      
